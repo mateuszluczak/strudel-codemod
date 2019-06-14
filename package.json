@@ -1,0 +1,35 @@
+{
+  "name": "strudel-codemod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "jscodeshift": "jscodeshift"
+  },
+  "jest": {
+    "globals": {
+      "baseDir": "../"
+    },
+    "testEnvironment": "node",
+    "roots": [
+      "transforms"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "keywords": [],
+  "author": "Mateusz Luczak <mateusz.luczak@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jscodeshift": "^0.6.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0"
+  }
+}

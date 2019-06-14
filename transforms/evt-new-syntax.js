@@ -20,12 +20,28 @@ module.exports = function(file, api) {
       const preventDefault = (decoratorArguments[1] || {}).value;
       const eventName = eventArgument.split("_")[0];
       const eventSelector = eventArgument.split("_")[1];
-      let newArguments = [];
+      let newArguments = [
+        {
+          type: "StringLiteral",
+          value: eventName,
+        }
+      ];
 
-      console.log();
-      console.log("eventSelector", eventSelector);
-      console.log("eventName", eventName);
-      console.log("preventDefault", preventDefault);
+      if (eventSelector) {
+        newArguments.push({
+          type: "StringLiteral",
+          value: eventSelector
+        });
+      }
+
+      if (typeof preventDefault !== 'undefined') {
+        newArguments.push({
+          type: "BooleanLiteral",
+          value: preventDefault
+        });
+      }
+
+      value.arguments = newArguments;
     });
 
   return root.toSource();

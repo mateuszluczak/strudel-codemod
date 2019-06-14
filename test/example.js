@@ -16,4 +16,9 @@ class Test {
     dddd() {
         
     }
+
+    @Evt('.click .dupa > .cos > .super', true)
+    dddsdad() {
+        
+    }
 }

@@ -1,3 +1,3 @@
-const defineTest = require('jscodeshift/dist/testUtils').defineTest;
+const defineTest = require("jscodeshift/dist/testUtils").defineTest;
 
-defineTest(__dirname, 'evt-new-syntax')
+defineTest(__dirname, "evt-new-syntax");

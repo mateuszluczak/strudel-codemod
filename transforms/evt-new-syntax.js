@@ -1,6 +1,10 @@
-module.exports = function(file, api) {
+const transformer = function(file, api, options) {
   const j = api.jscodeshift;
   const root = j(file.source);
+  const printOptions = options.printOptions || {
+    quote: "single",
+    trailingComma: true
+  };
 
   root
     .find(j.ClassBody)
@@ -12,10 +16,9 @@ module.exports = function(file, api) {
 
       return identifierName === "Evt";
     })
-    .forEach(function(identifier) {
+    .forEach(identifier => {
       const { value } = identifier;
       const decoratorArguments = value.arguments;
-
       const eventArgument = decoratorArguments[0].value.replace(" ", "_");
       const preventDefault = (decoratorArguments[1] || {}).value;
       const eventName = eventArgument.split("_")[0];
@@ -23,7 +26,7 @@ module.exports = function(file, api) {
       let newArguments = [
         {
           type: "StringLiteral",
-          value: eventName,
+          value: eventName
         }
       ];
 
@@ -34,7 +37,7 @@ module.exports = function(file, api) {
         });
       }
 
-      if (typeof preventDefault !== 'undefined') {
+      if (typeof preventDefault !== "undefined") {
         newArguments.push({
           type: "BooleanLiteral",
           value: preventDefault
@@ -44,5 +47,8 @@ module.exports = function(file, api) {
       value.arguments = newArguments;
     });
 
-  return root.toSource();
+  return root.toSource(printOptions);
 };
+
+module.exports = transformer;
+module.exports.parser = "babylon";

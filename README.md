@@ -4,17 +4,24 @@ This repository contains codemod scripts to use with [JSCodeshift](https://githu
 
 ## Usage
 
-`npx strudel-codemod <codemod> <path>`
+`npx strudel-codemod <transformer> <path>`
 
 ## Included Transforms
 
-### 1.0
-
-#### `evt-new-syntax`
-
+### `evt-new-syntax`
+Converts single argument in `Evt` (e.g., `@Evt('click selector')`) to multiple argument (e.g., `@Evt('click', 'selector')`).
 
 ```sh
-npx react-codemod 1.0/evt-new-syntax <path>
+npx strudel-codemod evt-new-syntax <path>
+```
+
+### Recast Options
+
+[Options to recast's printer](https://github.com/benjamn/recast/blob/master/lib/options.js) can be provided
+through the `printOptions` command line argument
+
+```sh
+npx strudel-codemod <transformer> --printOptions='{"quote":"double"}'
 ```
 
 ## License MIT
